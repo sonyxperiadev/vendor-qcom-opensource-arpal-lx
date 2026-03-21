@@ -58,7 +58,9 @@
 #ifdef VUI_DMGR_AUDIO_SUPPORTED
 #include <vui_dmgr_audio_intf.h>
 #endif
+#ifdef AUDIO_FEATURE_STATS_SUPPORTED
 #include <audio_feature_stats_intf.h>
+#endif
 #include <amdb_api.h>
 #include "PalCommon.h"
 #include "PalDefs.h"
@@ -779,12 +781,15 @@ public:
 #endif
 
     pal_stream_handle_t *afs_stream_handle = NULL;
+#ifdef AUDIO_FEATURE_STATS_SUPPORTED
     static void *feature_stats_handle;
     static afs_init_t feature_stats_init;
     static afs_deinit_t feature_stats_deinit;
     static void AudioFeatureStatsInit();
     static void AudioFeatureStatsDeInit();
     static int AudioFeatureStatsGetInfo(void **afs_payload, size_t *afs_payload_size);
+#endif
+
     void checkQVAAppPresence(afs_param_payload_t *payload);
     pal_param_payload *AFSWakeUpAlgoDetection();
 
