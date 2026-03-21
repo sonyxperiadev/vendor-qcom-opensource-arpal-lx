@@ -138,7 +138,8 @@ LOCAL_HEADER_LIBRARIES := \
     libvui_dmgr_headers \
     libaudiofeaturestats_headers \
     libarvui_intf_headers \
-    libarmemlog_headers
+    libarmemlog_headers \
+    kvh2xml_headers
 
 LOCAL_SHARED_LIBRARIES := \
     libar-gsl\
