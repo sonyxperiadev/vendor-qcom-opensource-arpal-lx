@@ -55,7 +55,9 @@
 #include <queue>
 #include <deque>
 #include <unordered_map>
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
 #include <vui_dmgr_audio_intf.h>
+#endif
 #include <audio_feature_stats_intf.h>
 #include <amdb_api.h>
 #include "PalCommon.h"
@@ -766,6 +768,7 @@ public:
     static std::shared_ptr<group_dev_config_t> activeGroupDevConfig;
     static group_dev_config_t currentGroupDevConfig;
 
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
     static void *vui_dmgr_lib_handle;
     static vui_dmgr_init_t vui_dmgr_init;
     static vui_dmgr_deinit_t vui_dmgr_deinit;
@@ -773,6 +776,7 @@ public:
     static void voiceuiDmgrManagerDeInit();
     static int32_t voiceuiDmgrPalCallback(int32_t param_id, void *payload, size_t payload_size);
     int32_t voiceuiDmgrRestartUseCases(vui_dmgr_param_restart_usecases_t *uc_info);
+#endif
 
     pal_stream_handle_t *afs_stream_handle = NULL;
     static void *feature_stats_handle;
