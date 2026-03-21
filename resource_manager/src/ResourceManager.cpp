@@ -511,9 +511,11 @@ cl_init_t ResourceManager::cl_init = NULL;
 cl_deinit_t ResourceManager::cl_deinit = NULL;
 cl_set_boost_state_t ResourceManager::cl_set_boost_state = NULL;
 
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
 void* ResourceManager::vui_dmgr_lib_handle = NULL;
 vui_dmgr_init_t ResourceManager::vui_dmgr_init = NULL;
 vui_dmgr_deinit_t ResourceManager::vui_dmgr_deinit = NULL;
+#endif
 
 void* ResourceManager::feature_stats_handle = NULL;
 afs_init_t ResourceManager::feature_stats_init = NULL;
@@ -1685,6 +1687,7 @@ exit:
     return status;
 }
 
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
 template <class T>
 void getMatchingStStreams(std::list<T> &active_streams, std::vector<Stream*> &st_streams, vui_dmgr_uuid_t &uuid)
 {
@@ -1819,6 +1822,7 @@ exit:
     vui_dmgr_init = NULL;
     vui_dmgr_deinit = NULL;
 }
+#endif
 
 void ResourceManager::checkQVAAppPresence(afs_param_payload_t *payload)
 {
@@ -2000,6 +2004,7 @@ void ResourceManager::AudioFeatureStatsDeInit()
     feature_stats_deinit = NULL;
 }
 
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
 void ResourceManager::voiceuiDmgrManagerDeInit()
 {
     if (vui_dmgr_deinit)
@@ -2012,6 +2017,7 @@ void ResourceManager::voiceuiDmgrManagerDeInit()
     vui_dmgr_init = NULL;
     vui_dmgr_deinit = NULL;
 }
+#endif
 
 int ResourceManager::initContextManager()
 {
@@ -2072,8 +2078,10 @@ int ResourceManager::init()
            PAL_INFO(LOG_TAG, "HapticsDev instance not created");
     }
 
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
     PAL_INFO(LOG_TAG, "Initialize voiceui dmgr");
     voiceuiDmgrManagerInit();
+#endif
 
     PAL_INFO(LOG_TAG, "Initialize Audio Feature Stats");
     AudioFeatureStatsInit();
@@ -7175,7 +7183,9 @@ void ResourceManager::deinit()
    if (isChargeConcurrencyEnabled)
        chargerListenerDeinit();
 
+#ifdef VUI_DMGR_AUDIO_SUPPORTED
     voiceuiDmgrManagerDeInit();
+#endif
     AudioFeatureStatsDeInit();
 
     cvMutex.lock();
