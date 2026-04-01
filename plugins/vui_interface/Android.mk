@@ -11,7 +11,8 @@ LOCAL_SRC_FILES := \
    src/SVAExtension.cpp
 
 LOCAL_C_INCLUDES += \
-    $(LOCAL_PATH)/inc
+    $(LOCAL_PATH)/inc \
+    $(PAL_BASE_PATH)/utils/inc
 
 LOCAL_HEADER_LIBRARIES := \
     libarpal_headers \
