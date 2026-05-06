@@ -441,7 +441,7 @@ pal_device_id_t StreamASR::GetAvailCaptureDevice()
 
 bool StreamASR::UseLpiCaptureProfile() {
 
-    if (outputConfig->output_mode == BUFFERED ||
+    if (outputConfig->output_mode == ASR_BUFFERED ||
         cmCfg->PartialModeInLpiSupported())
         return true;
 
@@ -729,7 +729,7 @@ int32_t StreamASR::SetRecognitionConfig(struct pal_asr_config *asrRecCfg)
                                                   asrRecCfg->silence_detection_duration;
     recConfig->enable_partial_transcription = asrRecCfg->enable_partial_transcription;
 
-    outputConfig->output_mode  = asrRecCfg->outputBufferMode ? BUFFERED : NON_BUFFERED;
+    outputConfig->output_mode  = asrRecCfg->outputBufferMode ? ASR_BUFFERED : ASR_NON_BUFFERED;
     outputConfig->out_buf_size = cmCfg->GetOutputBufferSize(outputConfig->output_mode);
     outputConfig->num_bufs     = 2;
 
