@@ -76,7 +76,7 @@ ASRCommonConfig::ASRCommonConfig():
 
 uint32_t ASRCommonConfig::GetOutputBufferSize(int mode) {
 
-    if (mode == BUFFERED)
+    if (mode == ASR_BUFFERED)
         return GetBufferingModeOutBufferSize();
 
     return OUT_BUF_SIZE_DEFAULT;
@@ -84,7 +84,7 @@ uint32_t ASRCommonConfig::GetOutputBufferSize(int mode) {
 
 uint32_t ASRCommonConfig::GetInputBufferSize(int mode) {
 
-    if (mode == BUFFERED)
+    if (mode == ASR_BUFFERED)
         return GetInputBufferSize();
 
     return GetPartialModeInputBufferSize();
